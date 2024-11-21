@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 app.use(express.json())
 
 app.use(cors({
-    origin:["https://mern-practice-1.vercel.app"],
+    origin:["https://localhost:3000"],
     methods : ["GET","POST"],
     
 }))
@@ -35,7 +35,7 @@ const Person = mongoose.model("person",{
 })
 
 
-app.get("/first_api",async(req,res)=>{
+app.get("/",async(req,res)=>{
     
     try{
        const response = await Post.find();

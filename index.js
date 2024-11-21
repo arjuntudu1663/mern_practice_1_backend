@@ -1,14 +1,11 @@
-
-import express from 'express'
-
-import cors from 'cors'
+const express = require("express");
+const cors = require("cors");
 const app = express();
-
-import mongoose from 'mongoose'
+const mongoose = require("mongoose")
 app.use(express.json())
 
 app.use(cors({
-    origin:["https://mern-practice-1-p1fh.vercel.app","http://localhost:3000"],
+    origin:["http://localhost:3000"],
     methods : ["GET","POST"],
     
 }))
@@ -30,6 +27,8 @@ const Post = mongoose.model("posts",{
    value:String,
    imgUrl:String
 })
+
+
 const Person = mongoose.model("person",{
    name:String,
    password:String

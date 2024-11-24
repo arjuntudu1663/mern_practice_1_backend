@@ -11,6 +11,7 @@ app.use(cors({
     
 }))
 
+const port = process.env.port || 5000;
 
 
 try{
@@ -138,7 +139,7 @@ app.post("/person_register",async (req,res)=>{
 
 
 
-app.listen(5000,(err)=>{
+app.listen(port,(err)=>{
 
      if(err){
         console.log("server not started")

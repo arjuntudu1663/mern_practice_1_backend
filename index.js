@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 app.use(express.json())
 
 app.use(cors({
-    origin:["https://mern-practice-1.vercel.app"],
+    origin:["http://localhost:3000","https://mern-practice-1.vercel.app"],
     methods : ["GET","POST"],
     
 }))
@@ -31,7 +31,8 @@ const Post = mongoose.model("posts",{
 
 const Person = mongoose.model("person",{
    name:String,
-   password:String
+   password:String,
+   
 })
 
 
@@ -39,7 +40,7 @@ app.get("/",async(req,res)=>{
     
     try{
        const response = await Post.find();
-       console.log(response)
+     
        res.json(response)
     }catch(e){
         if(e){
@@ -67,6 +68,30 @@ app.post("/create_post",async(req,res)=>{
 
 })
 
+app.post("/person_find",async(req,res)=>{
+    
+     console.log(req.body.id , " peson_find value ");
+     const id = req.body.id;
+
+     try{
+
+       const response = await Person.findById(id);
+       
+       res.json(response);
+
+     }catch(e){
+
+       if(e){
+
+          console.log(e);
+
+       }
+     }
+
+     
+
+})
+
 app.post("/login",async(req,res)=>{
        
     const name = req.body.name;
@@ -75,10 +100,7 @@ app.post("/login",async(req,res)=>{
     try{
        
       const response = await Person.find({name:req.body.name},{password:req.body.password});
-      if(response.length>0){
-          
-         return res.json({"status":true})
-      }
+      res.json({"status":true,"value":response[0]._id});
 
     }catch(e){
        
@@ -93,10 +115,13 @@ app.post("/login",async(req,res)=>{
 
 app.post("/person_register",async (req,res)=>{
 
-     console.log(req.body);
+   const name = req.body.name;
+   const password = req.body.password;
+
      try{
         
-        const response = await Person.create(req.body);
+        const response = await Person.create({name:name,password:password});
+        
         res.json(response)
 
      }catch(e){
@@ -113,9 +138,11 @@ app.post("/person_register",async (req,res)=>{
 
 
 app.listen(5000,(err)=>{
+
      if(err){
         console.log("server not started")
      }else{
         console.log("server is started")
      }
+
 });

@@ -140,7 +140,7 @@ app.post("/person_register",async (req,res)=>{
 
 app.post("/likePost",async(req,res)=>{
     
-   console.log(req.body);
+   console.log(req.body , " <===== response post" );
     
    try{
 
@@ -151,7 +151,8 @@ app.post("/likePost",async(req,res)=>{
          like:likeCount+1
       });
 
-      res.json(response2)
+      res.json([response,response2]);
+      
 
    }catch(e){
       if(e){

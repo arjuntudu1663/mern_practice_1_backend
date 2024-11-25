@@ -6,7 +6,7 @@ app.use(express.json())
 
 app.use(cors({
     origin:["https://mern-practice-1.vercel.app"],
-    credentials:true,
+   
     methods : ["GET","POST"],
     
 }))
@@ -42,6 +42,7 @@ app.get("/",async(req,res)=>{
     
     try{
        const response = await Post.find();
+       console.log(response)
      
        res.json(response)
     }catch(e){
@@ -59,7 +60,8 @@ app.post("/create_post",async(req,res)=>{
     try{
        
       const response = await Post.create(req.body);
-      console.log(response);
+      console.log(response , " <======== create post response");
+      res.json(response)
 
     }catch(e){
       

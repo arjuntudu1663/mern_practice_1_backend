@@ -151,7 +151,7 @@ app.post("/likePost",async(req,res)=>{
          like:likeCount+1
       });
 
-      console.log(response2);
+      res.json(response2)
 
    }catch(e){
       if(e){

@@ -145,13 +145,8 @@ app.post("/likePost",async(req,res)=>{
    try{
 
       const response = await Post.find({_id:id});
-      const likeCount = response[0].like
-
-      const response2 = await Post.findByIdAndUpdate({_id:id},{
-         like:likeCount+1
-      });
-
-      res.json([response,response2]);
+      
+      res.json(response);
       
 
    }catch(e){

@@ -140,7 +140,8 @@ app.post("/person_register",async (req,res)=>{
 
 app.post("/likePost",async(req,res)=>{
     
-   console.log(req.body , " <===== response post" );
+   
+   const id = req.body.id
     
    try{
 

@@ -148,6 +148,7 @@ app.post("/likePost",async(req,res)=>{
       
 
       const response = await Post.find({_id:id});
+      
       if(!response[0].like.includes(userId)){
          const likes = response[0].like
          const response2 = await Post.findByIdAndUpdate({_id:id},{

@@ -28,7 +28,7 @@ const Post = mongoose.model("posts",{
    name:String,
    value:String,
    imgUrl:String,
-   like:Number
+   like:[String]
 })
 
 
@@ -141,18 +141,21 @@ app.post("/person_register",async (req,res)=>{
 app.post("/likePost",async(req,res)=>{
     
    
-   const id = req.body.id
+   const id = req.body.id;
+   const userId = req.body.userId;
     
    try{
+      
 
       const response = await Post.find({_id:id});
-      const likeCount = response[0].like
-
-      const response2 = await Post.findByIdAndUpdate({_id:id},{
-         like:likeCount+1
-      })
-
-      res.json(response2);
+      if(!response[0].like.includes(userId)){
+         const likes = response[0].like
+         const response2 = await Post.findByIdAndUpdate({_id:id},{
+            like :[...likes,userId]
+         })
+         res.json(response2);
+      }
+      
       
 
    }catch(e){

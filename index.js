@@ -156,6 +156,10 @@ app.post("/likePost",async(req,res)=>{
          })
          res.json(response2);
       }
+      if(response[0].like.includes(userId)){
+          
+         res.json({"value":false})
+      }
       
       
 
